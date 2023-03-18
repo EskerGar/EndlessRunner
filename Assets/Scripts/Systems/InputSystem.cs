@@ -26,7 +26,13 @@ namespace Systems
 			var filter = world.Filter<GameComponent>().End();
 			var swipeEventPool = world.GetPool<SwipeEventComponent>();
 			
+#if UNITY_EDITOR
 			var swipe = GetStandaloneSwipe();
+#endif
+			
+#if UNITY_ANDROID && UNITY_EDITOR == false
+			var swipe = GetMobileSwipe();
+#endif
 
 			if (swipe != Swipe.Default)
 			{
